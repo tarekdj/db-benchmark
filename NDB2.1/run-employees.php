@@ -14,7 +14,7 @@ $connection = new Nette\Database\Connection(
 );
 
 $cacheStorage = new Nette\Caching\Storages\FileStorage(__DIR__ . '/temp');
-$dao = new Nette\Database\SelectionFactory(
+$dao = new Nette\Database\Context(
 	$connection,
 	new Nette\Database\Reflection\DiscoveredReflection($connection, $useCache ? $cacheStorage : NULL),
 	$useCache ? $cacheStorage : NULL
