@@ -1,7 +1,10 @@
 <?php
 
 
-require __DIR__ . '/vendor/autoload.php';
+if (@!include __DIR__ . '/vendor/autoload.php') {
+    echo 'Install Nette using `composer install`';
+    exit(1);
+}
 
 $useCache = TRUE;
 
