@@ -2,9 +2,14 @@
 
 use Model\Mapper;
 use Model\Repository\EmployeesRepository;
+use LeanMapper\Connection;
+use LeanMapper\DefaultEntityFactory;
 
-require_once __DIR__ . '/vendor/dibi.min.php';
-require_once __DIR__ . '/vendor/LeanMapper/loader.php';
+if (@!include __DIR__ . '/vendor/autoload.php') {
+    echo 'Install Lean Mapper using `composer install`';
+    exit(1);
+}
+
 require_once __DIR__ . '/Model/Mapper.php';
 require_once __DIR__ . '/Model/Entity/Employee.php';
 require_once __DIR__ . '/Model/Entity/Salary.php';
@@ -15,7 +20,7 @@ date_default_timezone_set('Europe/Prague');
 
 $limit = 500;
 
-$connection = new DibiConnection(array(
+$connection = new Connection(array(
 	'username' => 'root',
 	'password' => '',
 	'database' => 'employees',
@@ -25,7 +30,9 @@ $connection = new DibiConnection(array(
 $time = -microtime(TRUE);
 ob_start();
 
-$employeesRepository = new EmployeesRepository($connection, new Mapper);
+$entityFactory = new DefaultEntityFactory;
+$mapper = new Mapper();
+$employeesRepository = new EmployeesRepository($connection, $mapper, $entityFactory);
 
 foreach ($employeesRepository->findAll($limit) as $employee) {
 	echo "$employee->firstName $employee->lastName ($employee->empNo)\n";
