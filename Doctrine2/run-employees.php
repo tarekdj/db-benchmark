@@ -11,7 +11,10 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\ORM\Tools\Setup;
 
-require_once __DIR__ . '/vendor/autoload.php';
+if (@!include __DIR__ . '/vendor/autoload.php') {
+    echo 'Install Nette using `composer install`';
+    exit(1);
+}
 
 date_default_timezone_set('Europe/Prague');
 

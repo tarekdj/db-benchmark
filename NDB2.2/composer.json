@@ -2,6 +2,6 @@
 	"description": "Benchmark for Nette Database",
 	"require": {
 		"php": ">= 5.3.1",
-		"nette/nette": "2.1.*"
+		"nette/nette": "@dev"
 	}
 }
