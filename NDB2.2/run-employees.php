@@ -42,4 +42,4 @@ foreach ($dao->table('employees')->limit(500) as $employe) {
 
 ob_end_clean();
 
-print_benchmark_result('NDB 2.2', 'Nette: ' . Nette\Framework::VERSION);
+print_benchmark_result('NDB 2.2', 'Nette: 2.2.x');
