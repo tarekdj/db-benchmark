@@ -1,6 +1,7 @@
 <?php
 
 
+require __DIR__ . '/../print_benchmark_result.php';
 if (@!include __DIR__ . '/vendor/autoload.php') {
     echo 'Install Nette using `composer install`';
     exit(1);
@@ -39,7 +40,4 @@ foreach ($dao->table('employees')->limit(500) as $employe) {
 
 ob_end_clean();
 
-echo 'Time: ', sprintf('%0.3f', $time + microtime(TRUE)), ' s | ',
-	'Memory: ', (memory_get_peak_usage() >> 20), ' MB | ',
-	'PHP: ', PHP_VERSION, ' | ',
-	'Nette: ', Nette\Framework::VERSION;
+print_benchmark_result('NDB 2.0', 'Nette: ' . Nette\Framework::VERSION);

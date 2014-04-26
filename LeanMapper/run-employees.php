@@ -5,6 +5,8 @@ use Model\Repository\EmployeesRepository;
 use LeanMapper\Connection;
 use LeanMapper\DefaultEntityFactory;
 
+
+require __DIR__ . '/../print_benchmark_result.php';
 if (@!include __DIR__ . '/vendor/autoload.php') {
     echo 'Install Lean Mapper using `composer install`';
     exit(1);
@@ -48,6 +50,4 @@ foreach ($employeesRepository->findAll($limit) as $employee) {
 
 ob_end_clean();
 
-echo 'Time: ', sprintf('%0.3f', $time + microtime(TRUE)), ' s | ',
-	'Memory: ', (memory_get_peak_usage() >> 20), ' MB | ',
-	'PHP: ', PHP_VERSION;
+print_benchmark_result('LeanMapper');

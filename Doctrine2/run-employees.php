@@ -11,6 +11,8 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\ORM\Tools\Setup;
 
+
+require __DIR__ . '/../print_benchmark_result.php';
 if (@!include __DIR__ . '/vendor/autoload.php') {
     echo 'Install Nette using `composer install`';
     exit(1);
@@ -89,7 +91,5 @@ foreach ($paginator->getIterator() as $emp) {
 }
 
 ob_end_clean();
-echo 'Time: ', sprintf('%0.3f', $time + microtime(TRUE)), ' s | ',
-	'Memory: ', (memory_get_peak_usage() >> 20), ' MB | ',
-	'PHP: ', PHP_VERSION, ' | ',
-	'Doctrine: ', \Doctrine\Common\Version::VERSION;
+
+print_benchmark_result('Doctrine2', 'Doctrine: ' . \Doctrine\Common\Version::VERSION);
