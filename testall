@@ -1,27 +1,9 @@
 #!/usr/bin/env sh
 SRC_DIR="`pwd`"
-NEWLINE=$'\n'
 
-# Nette Database 2.0
 php "$SRC_DIR/NDB2.0/run-employees.php"
-echo $NEWLINE
-
-# Nette Database 2.1
 php "$SRC_DIR/NDB2.1/run-employees.php"
-echo $NEWLINE
-
-# Nette Database 2.2
 php "$SRC_DIR/NDB2.2/run-employees.php"
-echo $NEWLINE
-
-# NotORM
 php "$SRC_DIR/NotORM/run-employees.php"
-echo $NEWLINE
-
-# LeanMapper
 php "$SRC_DIR/LeanMapper/run-employees.php"
-echo $NEWLINE
-
-# Doctrine
 php "$SRC_DIR/Doctrine2/run-employees.php"
-echo $NEWLINE

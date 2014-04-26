@@ -1,5 +1,7 @@
 <?php
 
+
+require __DIR__ . '/../print_benchmark_result.php';
 require __DIR__ . '/vendor/NotORM/NotORM.php';
 require __DIR__ . '/NotORMStructure.php';
 
@@ -37,6 +39,4 @@ foreach ($notorm->employees()->limit($limit) as $employee) {
 
 ob_end_clean();
 
-echo 'Time: ', sprintf('%0.3f', $time + microtime(TRUE)), ' s | ',
-	'Memory: ', (memory_get_peak_usage() >> 20), ' MB | ',
-	'PHP: ', PHP_VERSION;
+print_benchmark_result('NotOrm');
