@@ -7,5 +7,6 @@ php "$SRC_DIR/NDB2.2/run-employees.php"
 # php "$SRC_DIR/NextrasOrm/run-employees.php"  #generating error
 php "$SRC_DIR/NotORM/run-employees.php"
 php "$SRC_DIR/pdo/run-employees.php"
+php "$SRC_DIR/FluentPdo/run-employees.php"
 php "$SRC_DIR/LeanMapper/run-employees.php"
 php "$SRC_DIR/Doctrine2/run-employees.php"
