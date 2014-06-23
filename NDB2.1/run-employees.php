@@ -2,6 +2,8 @@
 
 
 require __DIR__ . '/../print_benchmark_result.php';
+require __DIR__ . '/../db.php';
+
 if (@!include __DIR__ . '/vendor/autoload.php') {
     echo 'Install Nette using `composer install`';
     exit(1);
@@ -12,9 +14,9 @@ $useCache = TRUE;
 date_default_timezone_set('Europe/Prague');
 
 $connection = new Nette\Database\Connection(
-	'mysql:dbname=employees',
-	'root',
-	''
+	$db_location,
+	$db_user,
+  $db_pass
 );
 
 $cacheStorage = new Nette\Caching\Storages\FileStorage(__DIR__ . '/temp');

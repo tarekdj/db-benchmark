@@ -2,8 +2,9 @@
 
 use Nextras\Orm\Model\StaticModel;
 
-
 require __DIR__ . '/../print_benchmark_result.php';
+require __DIR__ . '/../db.php';
+
 if (@!include __DIR__ . '/vendor/autoload.php') {
     echo 'Install Nette using `composer install`';
     exit(1);
@@ -27,7 +28,11 @@ $limit = 500;
 
 $cacheStorage = new Nette\Caching\Storages\FileStorage(__DIR__ . '/temp');
 
-$connection  = new Nette\Database\Connection('mysql:dbname=employees', 'root', 'root');
+$connection  = new Nette\Database\Connection(
+	$db_location,
+	$db_user,
+  $db_pass
+);
 $structure   = new Nette\Database\Structure($connection, $useCache ? $cacheStorage : NULL);
 $conventions = new Nette\Database\Conventions\DiscoveredConventions($structure);
 $context     = new Nette\Database\Context($connection, $structure, $conventions, $useCache ? $cacheStorage : NULL);

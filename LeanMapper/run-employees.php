@@ -7,8 +7,10 @@ use LeanMapper\DefaultEntityFactory;
 
 
 require __DIR__ . '/../print_benchmark_result.php';
+require __DIR__ . '/../db.php';
+
 if (@!include __DIR__ . '/vendor/autoload.php') {
-    echo 'Install Lean Mapper using `composer install`';
+    echo 'Install Lean Mapper using `composer install`'.PHP_EOL;
     exit(1);
 }
 
@@ -23,9 +25,9 @@ date_default_timezone_set('Europe/Prague');
 $limit = 500;
 
 $connection = new Connection(array(
-	'username' => 'root',
-	'password' => 'root',
-	'database' => 'employees',
+	'username' => $db_user,
+	'password' => $db_pass,
+	'database' => $db_name,
 ));
 
 

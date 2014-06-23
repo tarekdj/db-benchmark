@@ -4,6 +4,7 @@
 require __DIR__ . '/../print_benchmark_result.php';
 require __DIR__ . '/vendor/NotORM/NotORM.php';
 require __DIR__ . '/NotORMStructure.php';
+require __DIR__ . '/../db.php';
 
 date_default_timezone_set('Europe/Prague');
 
@@ -11,9 +12,9 @@ $useCache = TRUE;
 $limit = 500;
 
 $connection = new PDO(
-	'mysql:dbname=employees',
-	'root',
-	'root'
+	$db_location,
+	$db_user,
+	$db_pass
 );
 
 $notorm = new NotORM(

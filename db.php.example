@@ -1,0 +1,10 @@
+<?php
+
+## example, save as "db.php" to use for real
+
+$db_driver = 'mysql';
+$db_name = 'employees';
+$db_pdo_driver = 'pdo_'.$db_driver;
+$db_location = $db_driver.':dbname='.$db_name;
+$db_user = 'root';
+$db_pass = 'root';

@@ -1,6 +1,7 @@
 <?php
 
 require __DIR__ . '/../print_benchmark_result.php';
+require __DIR__ . '/../db.php';
 
 date_default_timezone_set('Europe/Prague');
 
@@ -8,9 +9,9 @@ $useCache = TRUE;
 $limit = 500;
 
 $pdo = new PDO(
-	'mysql:dbname=employees',
-	'root',
-	'root'
+	$db_location,
+	$db_user,
+	$db_pass
 );
 
 

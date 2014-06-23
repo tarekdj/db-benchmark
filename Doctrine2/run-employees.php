@@ -13,8 +13,10 @@ use Doctrine\ORM\Tools\Setup;
 
 
 require __DIR__ . '/../print_benchmark_result.php';
+require __DIR__ . '/../db.php';
+
 if (@!include __DIR__ . '/vendor/autoload.php') {
-    echo 'Install Nette using `composer install`';
+    echo 'Install Doctrine using `composer install`'.PHP_EOL;
     exit(1);
 }
 
@@ -43,10 +45,10 @@ Type::overrideType(Type::DATETIME, 'Benchmark\Types\DateTimeType');
 // TODO you may want to change this? ;)
 $em = EntityManager::create(
 	[
-		'driver'   => 'pdo_mysql',
-		'user'     => 'root',
-		'password' => 'root',
-		'dbname'   => 'employees',
+		'driver'   => $db_pdo_driver,
+		'user'     => $db_user,
+		'password' => $db_pass,
+		'dbname'   => $db_name,
 	],
 	$config
 );
