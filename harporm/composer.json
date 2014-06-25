@@ -1,0 +1,5 @@
+{
+	"require": {
+		"harp-orm/query": "dev-master"
+	}
+}
