@@ -36,6 +36,13 @@ php "$SRC_DIR/FluentPdo/run-employees.php"
 }
 php "$SRC_DIR/harporm/run-employees.php"
 #####################################################
+[ -d $SRC_DIR/Pixie/vendor ] || {
+  cd $SRC_DIR/Pixie/
+  composer install
+  cd $SRC_DIR
+}
+php "$SRC_DIR/Pixie/run-employees.php"
+#####################################################
 [ -d $SRC_DIR/LeanMapper/vendor ] || {
   cd $SRC_DIR/LeanMapper/
   composer install
