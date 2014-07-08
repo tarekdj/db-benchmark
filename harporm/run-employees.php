@@ -16,9 +16,9 @@ $limit = 500;
 
 
 DB::setConfig([
-    'dsn' => $db_location.';host=127.0.0.1',
+    'dsn' => $db_location.';host='.$db_host,
     'username' => $db_user,
-    'password' => $db_user,
+    'password' => $db_pass,
 ]);
 
 
