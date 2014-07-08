@@ -14,11 +14,11 @@ date_default_timezone_set('Europe/Prague');
 $limit = 500;
 
 $config = array(
-            'driver'    => 'mysql', // Db driver
-            'host'      => 'localhost',
-            'database'  => 'employees',
-            'username'  => 'root',
-            'password'  => 'root',
+            'driver'    => $db_driver, // Db driver
+            'host'      => $db_host,
+            'database'  => $db_name,
+            'username'  => $db_user,
+            'password'  => $db_pass,
         );
 
 new \Pixie\Connection('mysql', $config, 'QB');
