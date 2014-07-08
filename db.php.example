@@ -8,3 +8,4 @@ $db_pdo_driver = 'pdo_'.$db_driver;
 $db_location = $db_driver.':dbname='.$db_name;
 $db_user = 'root';
 $db_pass = 'root';
+$db_host = 'localhost';
