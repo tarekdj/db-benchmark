@@ -1,24 +1,7 @@
 #!/usr/bin/env sh
 SRC_DIR="`pwd`"
 
-# php "$SRC_DIR/NDB2.0/run-employees.php" #not needed
-# php "$SRC_DIR/NDB2.1/run-employees.php" #not needed
-#####################################################
-[ -d $SRC_DIR/NDB2.2/vendor ] || {
-  cd $SRC_DIR/NDB2.2/
-  composer install
-  cd $SRC_DIR
-}
-php "$SRC_DIR/NDB2.2/run-employees.php"
-#####################################################
-# php "$SRC_DIR/NextrasOrm/run-employees.php"  #generating error
-#####################################################
-[ -d $SRC_DIR/NotORM/vendor ] || {
-  cd $SRC_DIR/NotORM/
-  composer install
-  cd $SRC_DIR
-}
-php "$SRC_DIR/NotORM/run-employees.php"
+
 #####################################################
 php "$SRC_DIR/pdo/run-employees.php"
 #####################################################
@@ -48,6 +31,14 @@ php "$SRC_DIR/Pixie/run-employees.php"
   composer install
   cd $SRC_DIR
 }
+
+
+
+exit;
+
+## keeping the ones below for reference, but we decided to
+## continue with the ones above only
+
 php "$SRC_DIR/LeanMapper/run-employees.php"
 #####################################################
 [ -d $SRC_DIR/Doctrine2/vendor ] || {
@@ -56,3 +47,21 @@ php "$SRC_DIR/LeanMapper/run-employees.php"
   cd $SRC_DIR
 }
 php "$SRC_DIR/Doctrine2/run-employees.php"
+# php "$SRC_DIR/NDB2.0/run-employees.php" #not needed
+# php "$SRC_DIR/NDB2.1/run-employees.php" #not needed
+#####################################################
+[ -d $SRC_DIR/NDB2.2/vendor ] || {
+  cd $SRC_DIR/NDB2.2/
+  composer install
+  cd $SRC_DIR
+}
+php "$SRC_DIR/NDB2.2/run-employees.php"
+#####################################################
+# php "$SRC_DIR/NextrasOrm/run-employees.php"  #generating error
+#####################################################
+[ -d $SRC_DIR/NotORM/vendor ] || {
+  cd $SRC_DIR/NotORM/
+  composer install
+  cd $SRC_DIR
+}
+php "$SRC_DIR/NotORM/run-employees.php"
