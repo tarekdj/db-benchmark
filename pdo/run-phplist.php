@@ -18,10 +18,17 @@ $pdo = new PDO(
 	$db_pass
 );
 
+$lu = \phpList\Config::getTableName('listuser');
+$u = \phpList\Config::getTableName('user');
+$lm = \phpList\Config::getTableName('listmessage');
+$um = \phpList\Config::getTableName('usermessage');
+$l = \phpList\Config::getTableName('list');
 
 
 $time = -microtime(TRUE);
 ob_start();
+
+#$pdo->Query('reset query cache');
 
 for($i = 0; $i<5; $i++){
 	$pdo->query(sprintf(
@@ -36,29 +43,29 @@ for($i = 0; $i<5; $i++){
                   AND u.id = listuser.userid
                   AND um.userid IS NULL
                   AND u.confirmed and !u.blacklisted and !u.disabled',
-            \phpList\Config::getTableName('listuser'),
-            \phpList\Config::getTableName('user_user'),
-            \phpList\Config::getTableName('listmessage'),
-            \phpList\Config::getTableName('usermessage'),
+            $lu,
+            $u,
+            $lm,
+            $um,
             $i,
             $i
 		));
 }
 
-for($i=100; $i<2000; $i++){
-        $result = $pdo->query(
-            sprintf(
-                'SELECT l.*
-                FROM %s AS lu
-                    INNER JOIN %s AS l
-                    ON lu.listid = l.id
-                WHERE lu.userid = %d',
-                \phpList\Config::getTableName('listuser'),
-                \phpList\Config::getTableName('list'),
-                $i
-            )
-        );
-    }
+for($i=100; $i<2000; $i++) {
+    $result = $pdo->query(
+      sprintf(
+          'SELECT l.*
+          FROM %s AS lu
+              INNER JOIN %s AS l
+              ON lu.listid = l.id
+          WHERE lu.userid = %d',
+          $lu,
+          $l,
+          $i
+      )
+    );
+}
 
 
 ob_end_clean();
