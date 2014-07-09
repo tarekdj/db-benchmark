@@ -24,11 +24,10 @@ $lm = \phpList\Config::getTableName('listmessage');
 $um = \phpList\Config::getTableName('usermessage');
 $l = \phpList\Config::getTableName('list');
 
+$pdo->Query('reset query cache');
 
 $time = -microtime(TRUE);
 ob_start();
-
-$pdo->Query('reset query cache');
 
 for($i = 0; $i<5; $i++){
 	$pdo->query(sprintf(
