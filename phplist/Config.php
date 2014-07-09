@@ -85,6 +85,15 @@ class Config extends \phpList\UserConfig
      */
     public static function getTableName($table_name, $is_user_table = false)
     {
+        switch ($table_name) {
+          case 'user':
+          case 'user_attribute':
+          case 'attribute':
+          case 'user_history':
+            $is_user_table = true;
+            break;
+        }
+      
         return ($is_user_table ? Config::USERTABLE_PREFIX : Config::TABLE_PREFIX) . $table_name;
     }
 
