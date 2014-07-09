@@ -1,5 +1,5 @@
 <?php
-use Harp\Query\DB;
+
 require __DIR__ . '/../print_benchmark_result.php';
 require __DIR__ . '/../db.php';
 
