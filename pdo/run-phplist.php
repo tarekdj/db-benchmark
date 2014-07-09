@@ -28,7 +28,7 @@ $l = \phpList\Config::getTableName('list');
 $time = -microtime(TRUE);
 ob_start();
 
-#$pdo->Query('reset query cache');
+$pdo->Query('reset query cache');
 
 for($i = 0; $i<5; $i++){
 	$pdo->query(sprintf(
