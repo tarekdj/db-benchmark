@@ -4,7 +4,7 @@ require __DIR__ . '/../print_benchmark_result.php';
 require __DIR__ . '/../db.php';
 
 if (@!include __DIR__ . '/vendor/autoload.php') {
-    echo 'Install Fluent using `composer install`'. PHP_EOL;
+    echo 'Install Pixie using `composer install`'. PHP_EOL;
     exit(1);
 }
 
