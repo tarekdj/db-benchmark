@@ -52,18 +52,17 @@ for($i = 0; $i<5; $i++){
         ->where("{$u}.confirmed", '=', 1)
         ->where("{$u}.blacklisted", '!=', 1)
         ->where("{$u}.disabled", '!=', 1)
-        ->select("{$u}.id");
-    //TODO: distinct query
-    echo $query->getQuery()->getRawSql();exit();
+        ->select($qb->raw("DISTINCT {$u}.id"));
 
+    //echo $query->getQuery()->getRawSql();exit();
 }
 
 for($i=100; $i<2000; $i++){
-    /*$query = DB::select()
-        ->from($lu)
-        ->join($l, array("{$lu}.listid" => "{$l}.id"), 'INNER')
-        ->where("{$lu}.userid", $i);
-    $query->execute();*/
+    $query = $qb->table($lu)
+        ->join($l, "{$lu}.listid", '=', "{$l}.id", 'INNER')
+        ->where("{$lu}.userid", '=', $i)
+        ->select("{$l}.*");
+    echo $query->getQuery()->getRawSql();exit();
 }
 
 
