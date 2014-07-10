@@ -26,6 +26,7 @@ DB::setConfig([
 $time = -microtime(TRUE);
 ob_start();
 
+
 $lu = \phpList\Config::getTableName('listuser');
 $u = \phpList\Config::getTableName('user');
 $lm = \phpList\Config::getTableName('listmessage');
@@ -34,15 +35,19 @@ $l = \phpList\Config::getTableName('list');
 
 for($i = 0; $i<5; $i++){
 	$query = DB::select()
+        ->column("{$u}.id")
 		->from($lu)
-        ->join($u, array("{$u}.id" => "{$lu}.userid"), 'CROSS')
-        ->where(true, true)
+        ->join($u, '', 'CROSS')
+        ->join($lm, '', 'CROSS')
+        ->join($um, array("{$um}.messageid" => $i, "{$um}.userid" => "{$lu}.userid"), 'LEFT')
         ->where("{$lm}.messageid", $i)
-        ->where("{$lm}.listid", "{$lu}.listid" )
-        ->where("{$u}.id", "{$lu}.userid" )
+        ->whereRaw("{$lm}.listid = {$lu}.listid" )
+        ->whereRaw("{$u}.id = {$lu}.userid" )
+        ->whereRaw("{$um}.userid IS NULL")
+        ->whereRaw("!{$u}.confirmed")
+        ->whereRaw("!{$u}.disabled")
         ->type('DISTINCT');
-    echo $query->sql();
-    #exit();
+    //echo $query->humanize(); exit();
     $query->execute();
 }
 
