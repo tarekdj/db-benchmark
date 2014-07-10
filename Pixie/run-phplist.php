@@ -20,8 +20,8 @@ $config = array(
     'host'      => $db_host,
     'database'  => $db_name,
     'username'  => $db_user,
-    'password'  => $db_pass,
-    'prefix'    => 'phplist_' //optional
+    'password'  => $db_pass/*,
+    'prefix'    => 'phplist_' //optional*/
 );
 
 $connection = new \Pixie\Connection('mysql', $config);
@@ -38,23 +38,21 @@ $um = \phpList\Config::getTableName('usermessage');
 $l = \phpList\Config::getTableName('list');
 
 for($i = 0; $i<5; $i++){
-    $query = $qb->table('user_user')
-        ->join('listuser', null, null, null, 'CROSS')
-        ->join('listmessage', null, null, null, 'CROSS')
-        ->leftJoin('usermessage', function($table)
+    $query = $qb->table($lu)
+        ->join($u, "{$lu}.userid", "=", "{$u}.id", 'CROSS')
+        ->join($lm, "{$lm}.listid", '=', "{$lu}.listid", 'CROSS')
+        ->leftJoin($um, function($table)
             {
-                global $i;
-                $table->on('usermessage.messageid', '=', $i);
-                $table->on('usermessage.userid', '=', 'listuser.userid');
+                global $i, $um, $lu, $qb;
+                $table->on("{$um}.messageid", '=',  $qb->raw($i));
+                $table->on("{$um}.userid", '=', "{$lu}.userid");
             })
-        ->where('listmessage.messageid', '=', $i)
-        ->where('listmessage.listid', '=', 'listuser.listid')
-        ->where('user_user.id', '=', 'listuser.userid')
-        ->where('usermessage.userid', 'IS')
-        ->where('user_user.confirmed')
-        ->where('!user_user.blacklisted')
-        ->where('!user_user.disabled')
-        ->select('user_user.id');
+        ->where("{$lm}.messageid", '=', $i)
+        ->where("{$um}.userid", 'IS', null)
+        ->where("{$u}.confirmed", '=', 1)
+        ->where("{$u}.blacklisted", '!=', 1)
+        ->where("{$u}.disabled", '!=', 1)
+        ->select("{$u}.id");
     //TODO: distinct query
     echo $query->getQuery()->getRawSql();exit();
 
