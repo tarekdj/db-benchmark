@@ -44,7 +44,8 @@ for($i = 0; $i<5; $i++){
         ->whereRaw("{$lm}.listid = {$lu}.listid" )
         ->whereRaw("{$u}.id = {$lu}.userid" )
         ->whereRaw("{$um}.userid IS NULL")
-        ->whereRaw("!{$u}.confirmed")
+        ->whereRaw("{$u}.confirmed")
+        ->whereRaw("!{$u}.blacklisted")
         ->whereRaw("!{$u}.disabled")
         ->type('DISTINCT');
     //echo $query->humanize(); exit();
