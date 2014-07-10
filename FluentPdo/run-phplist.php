@@ -40,7 +40,7 @@ for ($i = 0; $i<5; $i++) {
 	$users = $fpdo
     ->from($lu.' AS listuser')
     ->leftJoin($u .' AS u')
-    ->lectJoin($lm.' AS listmessage')
+    ->leftJoin($lm.' AS listmessage')
     ->leftJoin($um.' AS um ON (um.messageid = '.$i.' AND um.userid = listuser.userid)')
     ->select('u.id')->where('true AND listmessage.messageid = '.$i.'
                   AND listmessage.listid = listuser.listid
