@@ -54,6 +54,7 @@ for($i = 0; $i<5; $i++){
 
 for($i=100; $i<2000; $i++){
     $query = DB::select()
+        ->column("{$l}.*")
         ->from($lu)
         ->join($l, array("{$lu}.listid" => "{$l}.id"), 'INNER')
         ->where("{$lu}.userid", $i);
